@@ -1,0 +1,5 @@
+sentence-transformers==2.2.2
+pinecone==5.0.0
+pandas==2.0.3
+tqdm==4.66.1
+pyarrow==14.0.1
