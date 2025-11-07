@@ -6,10 +6,9 @@ from pinecone import Pinecone
 
 class VogueArchiveSearch:
     def __init__(self, api_key, index_name, environment):
-        """Initialize the search engine"""
-        # Using all-MiniLM-L6-v2 (384 dimensions) - matches current Pinecone index
-        # To upgrade to CLIP, see CLIP_UPGRADE_GUIDE.md
-        self.model = SentenceTransformer('all-MiniLM-L6-v2')
+        """Initialize the search engine with CLIP for better fashion understanding"""
+        # Using CLIP for fashion-aware embeddings (512 dimensions)
+        self.model = SentenceTransformer('clip-ViT-B-32')
         self.pc = Pinecone(api_key=api_key)
         self.index = self.pc.Index(index_name)
 
