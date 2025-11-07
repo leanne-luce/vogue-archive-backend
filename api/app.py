@@ -5,6 +5,12 @@ Deploy to Render.com free tier
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
+
+# Memory optimizations for free tier
+os.environ['TRANSFORMERS_CACHE'] = '/tmp'
+os.environ['HF_HOME'] = '/tmp'
+os.environ['TORCH_HOME'] = '/tmp'
+
 from search import VogueArchiveSearch
 
 app = Flask(__name__)

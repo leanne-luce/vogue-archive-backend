@@ -3,12 +3,15 @@ Vogue Archive Search Logic
 """
 from sentence_transformers import SentenceTransformer
 from pinecone import Pinecone
+import os
 
 class VogueArchiveSearch:
     def __init__(self, api_key, index_name, environment):
         """Initialize the search engine with CLIP for better fashion understanding"""
-        # Using CLIP for fashion-aware embeddings (512 dimensions)
-        self.model = SentenceTransformer('clip-ViT-B-32')
+        # Using CLIP text encoder for multimodal search (512 dimensions)
+        # Using lighter model loading for Render's memory constraints
+        self.model = SentenceTransformer('clip-ViT-B-32', device='cpu')
+        self.model.max_seq_length = 77  # CLIP's max token length
         self.pc = Pinecone(api_key=api_key)
         self.index = self.pc.Index(index_name)
 
